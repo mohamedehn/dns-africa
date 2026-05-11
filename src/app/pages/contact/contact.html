@@ -1,0 +1,198 @@
+<section class="bg-white py-14 md:py-20">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <app-section-header
+      appScrollReveal="fade-up"
+      badge="Nous contacter"
+      title="Demandez un devis sous 24h"
+      subtitle="Décrivez votre projet et nous revenons vers vous avec un périmètre, un délai et un prix ferme."
+    />
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-10">
+
+      <!-- ──────── FORM ──────── -->
+      <div appScrollReveal="fade-up">
+        @if (!success()) {
+          <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="space-y-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- Nom -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-muted uppercase tracking-wide">
+                  Prénom & Nom <span class="text-orange">*</span>
+                </label>
+                <input type="text" formControlName="nom" placeholder="Jean Dupont"
+                       [class]="isInvalid('nom') ? 'border-red-400 focus:ring-red-200' : 'border-border focus:ring-orange/20'"
+                       class="border rounded-lg px-4 py-3 text-sm text-text bg-white focus:outline-none focus:ring-2 focus:border-navy transition-colors" />
+                @if (isInvalid('nom')) {
+                  <span class="text-red-500 text-xs">Nom requis (min. 2 caractères).</span>
+                }
+              </div>
+
+              <!-- Société -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-muted uppercase tracking-wide">Société</label>
+                <input type="text" formControlName="societe" placeholder="Votre entreprise"
+                       class="border border-border rounded-lg px-4 py-3 text-sm text-text bg-white focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-navy transition-colors" />
+              </div>
+
+              <!-- Email -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-muted uppercase tracking-wide">
+                  Email <span class="text-orange">*</span>
+                </label>
+                <input type="email" formControlName="email" placeholder="j.dupont@societe.com"
+                       [class]="isInvalid('email') ? 'border-red-400 focus:ring-red-200' : 'border-border focus:ring-orange/20'"
+                       class="border rounded-lg px-4 py-3 text-sm text-text bg-white focus:outline-none focus:ring-2 focus:border-navy transition-colors" />
+                @if (isInvalid('email')) {
+                  <span class="text-red-500 text-xs">Adresse email invalide.</span>
+                }
+              </div>
+
+              <!-- Téléphone -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-muted uppercase tracking-wide">Téléphone</label>
+                <input type="tel" formControlName="telephone" placeholder="+33 6 XX XX XX XX"
+                       class="border border-border rounded-lg px-4 py-3 text-sm text-text bg-white focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-navy transition-colors" />
+              </div>
+
+              <!-- Prestation -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-muted uppercase tracking-wide">
+                  Type de prestation <span class="text-orange">*</span>
+                </label>
+                <select formControlName="prestation"
+                        [class]="isInvalid('prestation') ? 'border-red-400 focus:ring-red-200' : 'border-border focus:ring-orange/20'"
+                        class="border rounded-lg px-4 py-3 text-sm text-text bg-white focus:outline-none focus:ring-2 focus:border-navy transition-colors appearance-none">
+                  <option value="" disabled>Choisir…</option>
+                  @for (p of prestations; track p) {
+                    <option [value]="p">{{ p }}</option>
+                  }
+                </select>
+                @if (isInvalid('prestation')) {
+                  <span class="text-red-500 text-xs">Merci de sélectionner une prestation.</span>
+                }
+              </div>
+
+              <!-- Puissance -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-muted uppercase tracking-wide">Puissance estimée</label>
+                <select formControlName="puissance"
+                        class="border border-border rounded-lg px-4 py-3 text-sm text-text bg-white focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-navy transition-colors appearance-none">
+                  <option value="">Non définie</option>
+                  @for (p of puissances; track p) {
+                    <option [value]="p">{{ p }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-semibold text-muted uppercase tracking-wide">
+                Description du projet <span class="text-orange">*</span>
+              </label>
+              <textarea formControlName="message" rows="5"
+                        placeholder="Type de site, localisation, puissance, phase du projet, documents disponibles, timeline souhaitée…"
+                        [class]="isInvalid('message') ? 'border-red-400 focus:ring-red-200' : 'border-border focus:ring-orange/20'"
+                        class="border rounded-lg px-4 py-3 text-sm text-text bg-white focus:outline-none focus:ring-2 focus:border-navy transition-colors resize-none">
+              </textarea>
+              @if (isInvalid('message')) {
+                <span class="text-red-500 text-xs">Description requise (min. 20 caractères).</span>
+              }
+            </div>
+
+            @if (error()) {
+              <div class="flex items-start gap-3 border border-red-300 bg-red-50 rounded-xl px-4 py-3 text-sm text-red-700">
+                <i class="ti ti-alert-circle text-red-500 text-lg shrink-0 mt-0.5"></i>
+                <span>Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous écrire directement à <strong>contact&#64;dnsgroup-africa.com</strong>.</span>
+              </div>
+            }
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <button type="submit"
+                      [disabled]="loading()"
+                      class="inline-flex items-center gap-2 bg-orange hover:bg-orange-600 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold text-sm px-7 py-3.5 rounded-lg transition-colors duration-200">
+                @if (loading()) {
+                  <i class="ti ti-loader-2 animate-spin text-base"></i>
+                  Envoi en cours…
+                } @else {
+                  Envoyer la demande
+                  <i class="ti ti-arrow-right text-sm"></i>
+                }
+              </button>
+              <p class="text-muted text-xs">Réponse garantie sous 24h ouvrées · Devis gratuit et sans engagement</p>
+            </div>
+
+          </form>
+        } @else {
+          <!-- Success state -->
+          <div class="flex flex-col items-center text-center py-12 px-6 border border-green/30 rounded-2xl bg-green-100">
+            <div class="w-16 h-16 bg-green/15 rounded-full flex items-center justify-center mb-4">
+              <i class="ti ti-circle-check text-green text-4xl"></i>
+            </div>
+            <h3 class="font-heading font-bold text-navy text-xl mb-2">Demande envoyée !</h3>
+            <p class="text-muted text-sm mb-6 max-w-sm leading-relaxed">
+              Votre demande a bien été reçue. Nous vous répondrons sous 24h ouvrées avec un périmètre et un tarif.
+            </p>
+            <button (click)="reset()"
+                    class="inline-flex items-center gap-2 text-navy border border-border hover:border-orange hover:text-orange text-sm font-medium px-5 py-2.5 rounded-lg transition-colors duration-200">
+              <i class="ti ti-refresh text-sm"></i>
+              Nouvelle demande
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- ──────── INFO CARDS ──────── -->
+      <div appScrollReveal="fade-in" class="flex flex-col gap-4">
+
+        <!-- Email -->
+        <div class="border border-border rounded-xl p-5 bg-white flex items-start gap-4">
+          <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ti ti-mail text-orange text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-heading font-semibold text-navy text-sm mb-1">Email</h3>
+            <p class="text-orange text-sm font-medium">contact&#64;dnsgroup-africa.com</p>
+          </div>
+        </div>
+
+        <!-- Bureaux -->
+        <div class="border border-border rounded-xl p-5 bg-white flex items-start gap-4">
+          <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ti ti-map-pin text-navy text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-heading font-semibold text-navy text-sm mb-1">Bureaux</h3>
+            <p class="text-muted text-sm">France</p>
+            <p class="text-muted text-sm">Maroc · Tunisie</p>
+          </div>
+        </div>
+
+        <!-- Délai -->
+        <div class="border border-border rounded-xl p-5 bg-white flex items-start gap-4">
+          <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
+            <i class="ti ti-clock text-green text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-heading font-semibold text-navy text-sm mb-1">Délai de réponse</h3>
+            <p class="text-muted text-sm">Devis sous <strong class="text-navy">24h ouvrées</strong></p>
+            <p class="text-muted text-sm">Démarrage sous 48h après signature BC</p>
+          </div>
+        </div>
+
+        <!-- Offre spéciale -->
+        <div class="bg-navy rounded-xl p-5">
+          <p class="text-orange text-xs font-semibold tracking-widest uppercase mb-2">Offre spéciale</p>
+          <p class="text-white font-heading font-semibold text-sm mb-1">Étude de faisabilité OFFERTE</p>
+          <p class="text-[#8AABCC] text-xs leading-relaxed">
+            Sur votre premier dossier confié · Valeur 1 500 € HT
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

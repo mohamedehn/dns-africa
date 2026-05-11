@@ -1,0 +1,66 @@
+<footer>
+  <!-- Main footer -->
+  <div class="bg-navy py-10 md:py-14">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Col 1: Brand -->
+      <div>
+        <div class="font-heading font-bold text-xl text-white mb-3">
+          DNS <span class="text-orange">Africa</span>
+        </div>
+        <p class="text-[#6A8BAA] text-sm leading-relaxed mb-4">
+          Bureau d'études indépendant en ingénierie solaire et fluides.<br>
+          France · Maroc · Tunisie.
+        </p>
+        <p class="text-[#5A7A99] text-xs italic">
+          Connecting Africa, Lighting the Future
+        </p>
+      </div>
+
+      <!-- Col 2: Expertises -->
+      <div>
+        <h4 class="text-orange text-xs font-semibold tracking-widest uppercase mb-4">Expertises</h4>
+        <ul class="space-y-2">
+          @for (e of expertises; track e.label) {
+            <li>
+              <a [routerLink]="e.path"
+                 class="text-[#8AABCC] hover:text-white text-sm transition-colors duration-150">
+                {{ e.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Col 3: Contact -->
+      <div>
+        <h4 class="text-orange text-xs font-semibold tracking-widest uppercase mb-4">Contact</h4>
+        <ul class="space-y-2 text-sm text-[#8AABCC]">
+          <li class="flex items-center gap-2">
+            <i class="ti ti-mail text-orange text-base"></i>
+            <span>contact&#64;dnsgroup-africa.com</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="ti ti-world text-orange text-base"></i>
+            <span>www.dnsgroup-africa.com</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="ti ti-map-pin text-orange text-base"></i>
+            <span>France · Maroc · Tunisie</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bg-navy-900 py-4">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p class="text-[#5A7A99] text-xs">© {{ year }} DNS Africa — Tous droits réservés</p>
+      <div class="flex gap-4">
+        <a routerLink="/mentions-legales" class="text-[#5A7A99] hover:text-[#8AABCC] text-xs transition-colors">Mentions légales</a>
+        <a routerLink="/politique-de-confidentialite" class="text-[#5A7A99] hover:text-[#8AABCC] text-xs transition-colors">Politique de confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>

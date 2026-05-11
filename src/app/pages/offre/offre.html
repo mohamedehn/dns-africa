@@ -1,0 +1,134 @@
+<section class="bg-white py-14 md:py-20">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <app-section-header
+      appScrollReveal="fade-up"
+      badge="Tarifs & délais"
+      title="Notre offre — Marché France"
+      subtitle="Prix HT · Honoraires ingénierie uniquement · Hors CAPEX équipements et travaux · Devis sous 24h"
+    />
+
+    <!-- Desktop table -->
+    <div appScrollReveal="fade-up" class="hidden md:block rounded-xl border border-border overflow-hidden mb-6">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-navy text-white">
+            <th class="px-5 py-3.5 text-left font-heading font-semibold text-xs tracking-wide">Prestation</th>
+            <th class="px-5 py-3.5 text-left font-heading font-semibold text-xs tracking-wide">Périmètre</th>
+            <th class="px-5 py-3.5 text-left font-heading font-semibold text-xs tracking-wide">Livrables clés</th>
+            <th class="px-5 py-3.5 text-left font-heading font-semibold text-xs tracking-wide">Délai</th>
+            <th class="px-5 py-3.5 text-left font-heading font-semibold text-xs tracking-wide">Honoraires</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows; track row.label; let even = $even) {
+            <tr [class]="even ? 'bg-offwhite' : 'bg-white'" class="border-b border-border hover:bg-orange-100/40 transition-colors">
+              <td class="px-5 py-4 font-semibold" [class]="row.colorClass">{{ row.label }}</td>
+              <td class="px-5 py-4 text-text text-xs">
+                {{ row.perimeter }}
+                @if (row.perimeterSub) {
+                  <br><span class="text-muted">{{ row.perimeterSub }}</span>
+                }
+              </td>
+              <td class="px-5 py-4 text-muted text-xs leading-relaxed">{{ row.deliverables }}</td>
+              <td class="px-5 py-4 text-muted text-xs whitespace-nowrap">{{ row.delay }}</td>
+              <td class="px-5 py-4">
+                <span class="font-heading font-bold text-navy text-sm">{{ row.price }}</span>
+                @if (row.priceSub) {
+                  <br><span class="text-muted text-xs">{{ row.priceSub }}</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="md:hidden space-y-4 mb-6">
+      @for (row of rows; track row.label) {
+        <div appScrollReveal="fade-up" class="border border-border rounded-xl p-5 bg-white">
+          <div [class]="'font-heading font-bold text-base mb-3 ' + row.colorClass">{{ row.label }}</div>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-muted text-xs">Périmètre</span>
+              <span class="text-navy text-xs font-medium text-right">{{ row.perimeter }}</span>
+            </div>
+            <div class="flex justify-between items-start gap-2">
+              <span class="text-muted text-xs shrink-0">Délai</span>
+              <span class="text-navy text-xs font-medium text-right">{{ row.delay }}</span>
+            </div>
+            <div class="flex justify-between items-center pt-1 border-t border-border">
+              <span class="text-muted text-xs">Honoraires</span>
+              <span class="font-heading font-bold text-navy text-sm">{{ row.price }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Promo banner -->
+    <div appScrollReveal="fade-up"
+         class="bg-orange-100 border border-orange/30 rounded-xl p-5 flex items-start gap-4">
+      <div class="w-9 h-9 bg-orange/15 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+        <i class="ti ti-star-filled text-orange text-lg"></i>
+      </div>
+      <div>
+        <strong class="block font-heading text-navy font-semibold text-sm mb-1">
+          Offre de lancement — Étude de faisabilité OFFERTE
+        </strong>
+        <p class="text-muted text-xs leading-relaxed">
+          Sur votre premier dossier confié · Valeur 1 500 € HT · Remise –10 % dès 3 dossiers simultanés
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ PROCESSUS ═══════════════ -->
+<section class="bg-offwhite py-14 md:py-20">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <app-section-header
+      appScrollReveal="fade-up"
+      badge="Processus"
+      title="Comment ça marche"
+    />
+
+    <!-- Steps desktop -->
+    <div appScrollReveal="fade-up" class="hidden md:block relative">
+      <!-- Connector line -->
+      <div class="absolute top-7 left-[10%] right-[10%] h-0.5 bg-border z-0"></div>
+      <div class="grid grid-cols-5 gap-4 relative z-10">
+        @for (step of steps; track step.num) {
+          <div class="text-center">
+            <div [class]="'w-14 h-14 rounded-full flex items-center justify-center font-heading text-lg font-bold text-white mx-auto mb-3 ' + step.colorClass">
+              {{ step.num }}
+            </div>
+            <div class="text-orange text-xs font-semibold tracking-wide mb-1">{{ step.timing }}</div>
+            <h4 class="font-heading font-semibold text-navy text-sm mb-1">{{ step.title }}</h4>
+            <p class="text-muted text-xs leading-relaxed">{{ step.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Steps mobile -->
+    <div class="md:hidden space-y-4">
+      @for (step of steps; track step.num) {
+        <div appScrollReveal="fade-up" class="flex items-start gap-4 bg-white border border-border rounded-xl p-4">
+          <div [class]="'w-12 h-12 rounded-full flex items-center justify-center font-heading text-base font-bold text-white shrink-0 ' + step.colorClass">
+            {{ step.num }}
+          </div>
+          <div>
+            <div class="text-orange text-xs font-semibold tracking-wide mb-0.5">{{ step.timing }}</div>
+            <h4 class="font-heading font-semibold text-navy text-sm mb-1">{{ step.title }}</h4>
+            <p class="text-muted text-xs leading-relaxed">{{ step.desc }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

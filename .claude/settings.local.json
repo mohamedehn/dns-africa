@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version','?'\\)\\)\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); ex=d.get\\('exports',{}\\); [print\\(k\\) for k in list\\(ex.keys\\(\\)\\)[:20]]\")",
+      "Bash(ls \"C:\\\\Users\\\\Utilisateur\\\\Downloads\\\\\" | findstr /i \"PHOTO-2026-05-11-19-08-32\")",
+      "Read(//c/Users/Utilisateur/Downloads\" | findstr /**)",
+      "Bash(ls /mnt/c/Users/Utilisateur/Downloads/ | grep -i \"PHOTO-2026-05-11-19-08-32\")",
+      "Read(//mnt/c/Users/Utilisateur/**)",
+      "Bash(npx ng *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh api *)",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

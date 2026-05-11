@@ -1,0 +1,51 @@
+<section class="bg-white py-14 md:py-20">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <app-section-header
+      appScrollReveal="fade-up"
+      badge="Projets"
+      title="Références & réalisations"
+      subtitle="Exemples de projets accompagnés en ingénierie solaire, électricité et fluides."
+    />
+
+    <!-- Filter chips -->
+    <div appScrollReveal="fade-up" class="flex flex-wrap gap-2 mb-8">
+      @for (f of filterOptions; track f.id) {
+        <button
+          (click)="setFilter(f.id)"
+          [class]="activeFilter() === f.id
+            ? 'bg-navy text-white border-navy'
+            : 'bg-offwhite text-muted border-border hover:border-navy/30 hover:text-navy'"
+          class="border text-xs font-semibold px-4 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          {{ f.label }}
+        </button>
+      }
+    </div>
+
+    <!-- Projects grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (proj of filteredProjects(); track proj.title) {
+        <div appScrollReveal="fade-up"
+             class="card-hover border border-border rounded-xl p-5 bg-white hover:border-orange/30 flex flex-col">
+          <h4 class="font-heading font-semibold text-navy text-sm mb-2 leading-snug">{{ proj.title }}</h4>
+          <p class="text-muted text-xs leading-relaxed mb-4 grow">{{ proj.desc }}</p>
+          <div class="flex flex-wrap gap-1.5">
+            @for (tag of proj.tags; track tag.label) {
+              <span [class]="'text-xs font-semibold px-2.5 py-1 rounded ' + tag.colorClass">
+                {{ tag.label }}
+              </span>
+            }
+          </div>
+        </div>
+      }
+
+      @if (filteredProjects().length === 0) {
+        <div class="col-span-full text-center py-12 text-muted">
+          <i class="ti ti-search text-4xl mb-3 block"></i>
+          <p>Aucun projet pour ce filtre.</p>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

@@ -1,1 +1,182 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@source "../src";
+
+@theme {
+  /* ── Brand palette ──────────────────────────────────────────── */
+  --color-navy:        #1A2D6B;
+  --color-navy-800:    #152358;
+  --color-navy-900:    #0f1a3d;
+  --color-orange:      #F7941D;
+  --color-orange-600:  #e07d0a;
+  --color-orange-100:  #FFF4E6;
+  --color-green:       #4AAD52;
+  --color-green-600:   #3d9244;
+  --color-green-100:   #EBF7ED;
+  --color-blue-100:    #EBF4FF;
+  --color-offwhite:    #F7F9FC;
+  --color-border:      #E2E8F0;
+  --color-muted:       #718096;
+  --color-text:        #1A202C;
+
+  /* ── Fonts ──────────────────────────────────────────────────── */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body:    'Inter', sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+    color: #1A202C;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: #1A2D6B;
+    line-height: 1.2;
+  }
+
+  * { box-sizing: border-box; }
+}
+
+/* ── Hero load animations ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  100% { transform: scale(1.5);  opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ── Hero element classes ──────────────────────────────────────── */
+@layer components {
+  .hero-badge   { animation: fadeIn  0.5s ease both; }
+  .hero-title   { animation: fadeUp  0.65s ease 0.1s both; }
+  .hero-sub     { animation: fadeUp  0.65s ease 0.22s both; }
+  .hero-ctas    { animation: fadeUp  0.65s ease 0.34s both; }
+  .hero-stats   { animation: fadeUp  0.65s ease 0.46s both; }
+  .hero-img     { animation: scaleIn 0.8s  ease 0.2s  both; }
+
+  /* Floating logo */
+  .logo-float   { animation: float 6s ease-in-out infinite; }
+
+  /* CTA button pulse ring */
+  .btn-primary {
+    position: relative;
+    overflow: visible;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: theme('colors.orange / 40%');
+    animation: pulse-ring 2.2s ease-out infinite;
+    pointer-events: none;
+  }
+}
+
+/* ── Scroll Reveal Animations ──────────────────────────────────── */
+@layer components {
+  .sr-hidden  { opacity: 0; }
+  .sr-fade-up {
+    transform: translateY(26px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .sr-fade-in  { transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
+  .sr-slide-left {
+    transform: translateX(-20px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .sr-visible  { opacity: 1 !important; transform: none !important; }
+
+  /* Stagger delays */
+  .sr-delay-1 { transition-delay: 0.06s; }
+  .sr-delay-2 { transition-delay: 0.13s; }
+  .sr-delay-3 { transition-delay: 0.20s; }
+  .sr-delay-4 { transition-delay: 0.27s; }
+  .sr-delay-5 { transition-delay: 0.34s; }
+  .sr-delay-6 { transition-delay: 0.41s; }
+
+  /* ── Card hover lift ──────────────────────────────────────────── */
+  .card-hover {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(26, 45, 107, 0.1);
+  }
+
+  /* ── Gradient border on focus ─────────────────────────────────── */
+  .input-field {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .input-field:focus {
+    box-shadow: 0 0 0 3px rgba(247, 148, 29, 0.15);
+  }
+
+  /* ── Underline link animation ─────────────────────────────────── */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 2px;
+    background: theme('colors.orange');
+    transition: width 0.3s ease;
+  }
+  .link-underline:hover::after { width: 100%; }
+
+  /* ── Hamburger bars ───────────────────────────────────────────── */
+  .burger-bar {
+    display: block;
+    width: 20px; height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .burger-open .burger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger-open .burger-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .burger-open .burger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Tab indicator slide ──────────────────────────────────────── */
+  .tab-btn {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+}
