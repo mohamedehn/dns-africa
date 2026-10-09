@@ -1,65 +1,71 @@
-<footer>
-  <!-- Main footer -->
-  <div class="bg-navy py-10 md:py-14">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+<footer class="relative overflow-hidden bg-navy-950 text-white">
+  <div class="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-orange to-transparent"></div>
+  <div class="orb orb-a w-96 h-96 bg-orange/10 -top-40 -left-24" aria-hidden="true"></div>
+  <div class="orb orb-b w-96 h-96 bg-green/10 -bottom-48 right-0" aria-hidden="true"></div>
 
-      <!-- Col 1: Brand -->
+  <!-- Bandeau CTA -->
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-16">
+    <div class="glass rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
       <div>
-        <div class="font-heading font-bold text-xl text-white mb-3">
-          DNS <span class="text-orange">Africa</span>
-        </div>
-        <p class="text-[#6A8BAA] text-sm leading-relaxed mb-4">
-          Bureau d'études indépendant en ingénierie solaire et fluides.<br>
-          France · Maroc · Tunisie.
-        </p>
-        <p class="text-[#5A7A99] text-xs italic">
-          Connecting Africa, Lighting the Future
-        </p>
+        <h2 class="font-heading text-2xl md:text-3xl font-extrabold text-white mb-2">Un projet solaire en vue&nbsp;?</h2>
+        <p class="text-[#A9BCD8] text-sm md:text-base">Parlons-en. Périmètre, délai et prix ferme sous 24&nbsp;h ouvrées.</p>
       </div>
-
-      <!-- Col 2: Expertises -->
-      <div>
-        <h4 class="text-orange text-xs font-semibold tracking-widest uppercase mb-4">Expertises</h4>
-        <ul class="space-y-2">
-          @for (e of expertises; track e.label) {
-            <li>
-              <a [routerLink]="e.path"
-                 class="text-[#8AABCC] hover:text-white text-sm transition-colors duration-150">
-                {{ e.label }}
-              </a>
-            </li>
-          }
-        </ul>
-      </div>
-
-      <!-- Col 3: Contact -->
-      <div>
-        <h4 class="text-orange text-xs font-semibold tracking-widest uppercase mb-4">Contact</h4>
-        <ul class="space-y-2 text-sm text-[#8AABCC]">
-          <li class="flex items-center gap-2">
-            <i class="ti ti-mail text-orange text-base"></i>
-            <span>contact&#64;dnsgroup-africa.com</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <i class="ti ti-world text-orange text-base"></i>
-            <span>www.dnsgroup-africa.com</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <i class="ti ti-map-pin text-orange text-base"></i>
-            <span>France · Maroc · Tunisie</span>
-          </li>
-        </ul>
-      </div>
+      <a routerLink="/contact"
+         class="btn-shine shrink-0 inline-flex items-center gap-2 bg-orange hover:bg-orange-600 text-white font-semibold text-sm px-7 py-3.5 rounded-full">
+        Demander un devis
+        <i class="ti ti-arrow-up-right"></i>
+      </a>
     </div>
   </div>
 
-  <!-- Bottom bar -->
-  <div class="bg-navy-900 py-4">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row justify-between items-center gap-2">
-      <p class="text-[#5A7A99] text-xs">© {{ year }} DNS Africa — Tous droits réservés</p>
-      <div class="flex gap-4">
-        <a routerLink="/mentions-legales" class="text-[#5A7A99] hover:text-[#8AABCC] text-xs transition-colors">Mentions légales</a>
-        <a routerLink="/politique-de-confidentialite" class="text-[#5A7A99] hover:text-[#8AABCC] text-xs transition-colors">Politique de confidentialité</a>
+  <!-- Colonnes -->
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
+
+    <div class="md:col-span-2">
+      <div class="font-heading font-extrabold text-2xl mb-3">DNS <span class="text-orange">Africa</span></div>
+      <p class="text-[#8FA6C6] text-sm leading-relaxed max-w-sm mb-4">
+        Bureau d'études indépendant en ingénierie solaire et fluides. De la faisabilité à la réception, un seul interlocuteur sur trois continents.
+      </p>
+      <p class="text-orange/80 text-xs italic tracking-wide">Connecting Africa, Lighting the Future</p>
+    </div>
+
+    <div>
+      <h3 class="text-orange text-xs font-semibold tracking-widest uppercase mb-5">Expertises</h3>
+      <ul class="space-y-2.5">
+        @for (e of expertises; track e.label) {
+          <li>
+            <a [routerLink]="e.path" class="link-underline text-[#A9BCD8] hover:text-white text-sm transition-colors duration-150">{{ e.label }}</a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-orange text-xs font-semibold tracking-widest uppercase mb-5">Contact</h3>
+      <ul class="space-y-3 text-sm text-[#A9BCD8]">
+        <li class="flex items-center gap-2.5">
+          <i class="ti ti-mail text-orange text-base"></i>
+          <a href="mailto:contact@dnsgroup-africa.com" class="hover:text-white transition-colors">contact&#64;dnsgroup-africa.com</a>
+        </li>
+        <li class="flex items-center gap-2.5">
+          <i class="ti ti-world text-orange text-base"></i>
+          <span>www.dnsgroup-africa.com</span>
+        </li>
+        <li class="flex items-center gap-2.5">
+          <i class="ti ti-map-pin text-orange text-base"></i>
+          <span>France · Maroc · Tunisie</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Barre basse -->
+  <div class="relative border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p class="text-[#6A85A8] text-xs">© {{ year }} DNS Africa — Tous droits réservés</p>
+      <div class="flex gap-5">
+        <a routerLink="/mentions-legales" class="text-[#6A85A8] hover:text-white text-xs transition-colors">Mentions légales</a>
+        <a routerLink="/politique-de-confidentialite" class="text-[#6A85A8] hover:text-white text-xs transition-colors">Politique de confidentialité</a>
       </div>
     </div>
   </div>

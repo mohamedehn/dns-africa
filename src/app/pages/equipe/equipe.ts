@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { SectionHeaderComponent } from '../../shared/components/section-header/section-header';
+import { PageHeroComponent } from '../../shared/components/page-hero/page-hero';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
 @Component({
   selector: 'app-equipe',
   standalone: true,
-  imports: [SectionHeaderComponent, ScrollRevealDirective],
+  imports: [PageHeroComponent, ScrollRevealDirective],
   templateUrl: './equipe.html',
   styleUrl: './equipe.css'
 })

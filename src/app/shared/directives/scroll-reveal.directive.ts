@@ -5,7 +5,7 @@ import { Directive, ElementRef, Input, afterNextRender, inject } from '@angular/
   standalone: true
 })
 export class ScrollRevealDirective {
-  @Input() appScrollReveal: 'fade-up' | 'fade-in' | 'slide-left' = 'fade-up';
+  @Input() appScrollReveal: 'fade-up' | 'fade-in' | 'slide-left' | 'slide-right' | 'zoom' = 'fade-up';
   private el = inject(ElementRef);
 
   constructor() {

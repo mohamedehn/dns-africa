@@ -4,3 +4,21 @@
   top: 0;
   z-index: 50;
 }
+
+/* Soulignement animé des liens desktop */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-orange);
+  transform: translateX(-50%);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover::after,
+.nav-link.nav-active::after {
+  width: 55%;
+}

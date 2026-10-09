@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SectionHeaderComponent } from '../../shared/components/section-header/section-header';
+import { PageHeroComponent } from '../../shared/components/page-hero/page-hero';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
 interface SfItem { icon: string; title: string; desc: string; }
@@ -8,7 +8,7 @@ interface SfTab  { id: string; label: string; heading: string; items: SfItem[]; 
 @Component({
   selector: 'app-savoir-faire',
   standalone: true,
-  imports: [SectionHeaderComponent, ScrollRevealDirective],
+  imports: [PageHeroComponent, ScrollRevealDirective],
   templateUrl: './savoir-faire.html',
   styleUrl: './savoir-faire.css'
 })

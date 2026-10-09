@@ -1,82 +1,179 @@
 <!-- ═══════════════════════════════════════════════════════════════
-     HERO — fond blanc, couleurs logo
+     HERO — plein écran, fond sombre animé
 ═══════════════════════════════════════════════════════════════ -->
-<section class="relative bg-white overflow-hidden">
-  <!-- Arcs décoratifs inspirés du logo (top-right) -->
-  <div class="absolute top-0 right-0 w-[520px] h-[520px] -translate-y-1/4 translate-x-1/4 pointer-events-none" aria-hidden="true">
-    <div class="absolute inset-0 rounded-full border-[40px] border-orange/6"></div>
-    <div class="absolute inset-12 rounded-full border-[28px] border-orange/5"></div>
-    <div class="absolute inset-24 rounded-full border-[18px] border-green/5"></div>
-  </div>
-  <!-- Arc bas-gauche -->
-  <div class="absolute -bottom-20 -left-20 w-72 h-72 pointer-events-none" aria-hidden="true">
-    <div class="absolute inset-0 rounded-full border-[24px] border-navy/4"></div>
-  </div>
+<section class="relative overflow-hidden bg-hero text-white min-h-[calc(100svh-4.5rem)] flex items-center">
+  <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
+  <div class="orb orb-a w-[520px] h-[520px] bg-orange/25 -top-40 right-[-8rem]" aria-hidden="true"></div>
+  <div class="orb orb-b w-[460px] h-[460px] bg-green/20 bottom-[-12rem] left-[-6rem]" aria-hidden="true"></div>
 
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-14 md:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+  <!-- Soleil orbital géant -->
+  <svg class="absolute -right-56 top-1/2 -translate-y-1/2 w-[900px] h-[900px] opacity-40 pointer-events-none hidden md:block" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+    <g class="spin-slow" style="transform-origin:200px 200px">
+      <circle cx="200" cy="200" r="190" stroke="#F7941D" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 10"/>
+      <circle cx="200" cy="200" r="150" stroke="#fff" stroke-opacity=".18" stroke-width="1"/>
+      <circle cx="390" cy="200" r="5" fill="#F7941D"/>
+    </g>
+    <g class="spin-rev" style="transform-origin:200px 200px">
+      <circle cx="200" cy="200" r="110" stroke="#4AAD52" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="1 9"/>
+      <circle cx="90" cy="200" r="4" fill="#4AAD52"/>
+    </g>
+  </svg>
 
-    <!-- ── Colonne texte ── -->
+  <div class="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
+
+    <!-- Colonne texte -->
     <div>
-      <!-- Badge -->
-      <div class="hero-badge inline-flex items-center gap-2 bg-orange/10 text-orange text-xs font-semibold tracking-widest uppercase px-3.5 py-1.5 rounded-full mb-6">
-        <i class="ti ti-solar-panel text-sm"></i>
-        Bureau d'études indépendant
+      <div class="hero-badge inline-flex items-center gap-2.5 bg-white/8 border border-white/15 text-orange text-xs font-semibold tracking-[0.18em] uppercase px-4 py-2 rounded-full mb-8 backdrop-blur">
+        <span class="relative flex w-2 h-2">
+          <span class="absolute inset-0 rounded-full bg-green opacity-75 animate-ping"></span>
+          <span class="relative w-2 h-2 rounded-full bg-green"></span>
+        </span>
+        Bureau d'études indépendant · Europe &amp; Afrique
       </div>
 
-      <!-- Titre -->
-      <h1 class="hero-title font-heading text-[2.6rem] md:text-5xl lg:text-[3.25rem] font-extrabold text-navy leading-[1.1] mb-5 tracking-tight">
-        Ingénierie solaire<br>
-        <span class="text-orange">clé en main</span>
+      <h1 class="font-heading text-white text-[2.7rem] sm:text-6xl lg:text-[4.4rem] font-extrabold leading-[1.04] tracking-tight mb-7">
+        @for (w of titleWords; track w.text; let i = $index) {
+          <span class="word-mask mr-[0.22em]">
+            <span [style.animation-delay]="(0.15 + i * 0.14) + 's'" [class]="w.accent ? 'text-gradient' : ''">{{ w.text }}</span>
+          </span>
+        }
       </h1>
 
-      <!-- Sous-titre -->
-      <p class="hero-sub text-muted text-base md:text-[17px] leading-relaxed mb-8 max-w-lg">
-        Études, ingénierie EXE, AMO et supervision de chantier.<br class="hidden sm:block">
-        France · Maroc · Tunisie · Afrique francophone.
+      <p class="hero-sub text-[#B8C9E3] text-base md:text-lg leading-relaxed mb-10 max-w-xl">
+        De la faisabilité à la réception : études, ingénierie d'exécution, AMO et supervision de chantier
+        pour les plus grandes centrales solaires de <strong class="text-white font-semibold">France, du Maghreb et d'Afrique francophone</strong>.
       </p>
 
-      <!-- CTAs -->
-      <div class="hero-ctas flex flex-wrap gap-3 mb-10">
+      <div class="hero-ctas flex flex-wrap gap-4 mb-12">
         <a routerLink="/contact"
-           class="btn-primary inline-flex items-center gap-2 bg-orange hover:bg-orange-600 text-white font-semibold text-sm px-6 py-3 rounded-lg transition-colors duration-200 shadow-sm shadow-orange/30">
+           class="btn-shine inline-flex items-center gap-2.5 bg-orange hover:bg-orange-600 text-white font-semibold text-sm px-8 py-4 rounded-full shadow-lg shadow-orange/30">
           Demander un devis
-          <i class="ti ti-arrow-right text-sm"></i>
+          <i class="ti ti-arrow-up-right"></i>
         </a>
         <a routerLink="/savoir-faire"
-           class="inline-flex items-center gap-2 border border-navy/20 hover:border-orange hover:text-orange text-navy text-sm px-6 py-3 rounded-lg transition-colors duration-200">
-          Nos expertises
-          <i class="ti ti-chevron-right text-sm"></i>
+           class="group inline-flex items-center gap-2.5 border border-white/25 hover:border-orange hover:bg-white/5 text-white text-sm font-medium px-8 py-4 rounded-full transition-all duration-300">
+          Découvrir nos expertises
+          <i class="ti ti-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
         </a>
       </div>
 
-      <!-- Stats séparées par une ligne -->
-      <div class="hero-stats grid grid-cols-3 gap-6 pt-8 border-t border-border">
-        @for (stat of stats; track stat.value) {
-          <div>
-            <div class="font-heading text-2xl md:text-3xl font-bold text-orange leading-none">{{ stat.value }}</div>
-            <div class="text-xs text-muted mt-1.5 leading-snug">{{ stat.label }}</div>
-          </div>
-        }
+      <div class="hero-stats flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-[#8FA6C6]">
+        <span class="inline-flex items-center gap-2"><i class="ti ti-circle-check text-green text-base"></i>PVsyst · PVGIS</span>
+        <span class="inline-flex items-center gap-2"><i class="ti ti-circle-check text-green text-base"></i>NF C 15-100 · UTE C 15-712</span>
+        <span class="inline-flex items-center gap-2"><i class="ti ti-circle-check text-green text-base"></i>Enedis · STEG · SOMELEC</span>
       </div>
     </div>
 
-    <!-- ── Colonne logo (desktop) ── -->
-    <div class="hidden lg:flex justify-center items-center">
-      <img src="logo.jpg" alt="DNS Africa"
-           class="hero-img logo-float w-85 h-85 object-contain select-none"
-           style="mix-blend-mode: multiply;" />
-    </div>
+    <!-- Colonne visuel : tableau de bord de production -->
+    <div class="hero-img relative hidden lg:block">
+      <div class="glass rounded-3xl p-6 float-slow">
+        <div class="flex items-center justify-between mb-5">
+          <div>
+            <div class="text-[11px] uppercase tracking-[0.18em] text-[#8FA6C6]">Simulation · exemple illustratif</div>
+            <div class="font-heading font-bold text-lg text-white whitespace-nowrap">Centrale 12 MWc · HTA</div>
+          </div>
+          <span class="inline-flex items-center gap-1.5 whitespace-nowrap text-[11px] font-semibold text-green bg-green/15 px-2.5 py-1 rounded-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-green animate-pulse"></span>P50 / P90
+          </span>
+        </div>
 
+        <svg viewBox="0 0 480 250" class="w-full" role="img" aria-label="Courbe de production solaire journalière et production mensuelle">
+          <defs>
+            <linearGradient id="curveFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F7941D" stop-opacity=".45"/>
+              <stop offset="1" stop-color="#F7941D" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          @for (i of [0,1,2,3]; track i) {
+            <line x1="0" [attr.y1]="30 + i * 40" x2="480" [attr.y2]="30 + i * 40" stroke="#fff" stroke-opacity=".08"/>
+          }
+          <path d="M0 150 C80 150 110 30 240 30 S400 150 480 150 L480 150 L0 150Z" fill="url(#curveFill)"/>
+          <path d="M0 150 C80 150 110 30 240 30 S400 150 480 150" stroke="#F7941D" stroke-width="3" stroke-linecap="round" fill="none" class="draw-path" pathLength="1000"/>
+          <circle cx="240" cy="30" r="5" fill="#fff"/>
+          <circle cx="240" cy="30" r="5" fill="#F7941D" class="ping"/>
+          @for (m of months; track $index; let i = $index) {
+            <rect [attr.x]="6 + i * 39.5" [attr.y]="245 - m * 0.8" width="26" [attr.height]="m * 0.8" rx="5"
+                  [attr.fill]="i % 3 === 0 ? '#4AAD52' : '#ffffff'" [attr.fill-opacity]="i % 3 === 0 ? 0.95 : 0.35"
+                  class="bar" [style.animation-delay]="(0.9 + i * 0.07) + 's'"/>
+          }
+        </svg>
+
+        <div class="grid grid-cols-3 gap-3 mt-5">
+          <div class="rounded-xl bg-white/5 border border-white/10 px-3 py-2.5">
+            <div class="text-[10px] uppercase tracking-wider text-[#8FA6C6]">Productible</div>
+            <div class="font-heading font-bold text-orange">1 780 kWh/kWc</div>
+          </div>
+          <div class="rounded-xl bg-white/5 border border-white/10 px-3 py-2.5">
+            <div class="text-[10px] uppercase tracking-wider text-[#8FA6C6]">PR</div>
+            <div class="font-heading font-bold text-green">84 %</div>
+          </div>
+          <div class="rounded-xl bg-white/5 border border-white/10 px-3 py-2.5">
+            <div class="text-[10px] uppercase tracking-wider text-[#8FA6C6]">TRI projet</div>
+            <div class="font-heading font-bold text-white">11,2 %</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pastilles flottantes -->
+      <div class="absolute -left-12 -top-6 glass rounded-2xl px-4 py-3 flex items-center gap-3 float-slow" style="animation-delay:-2s">
+        <div class="w-9 h-9 rounded-lg bg-orange/20 flex items-center justify-center"><i class="ti ti-bolt text-orange text-lg"></i></div>
+        <div><div class="font-heading font-bold text-sm leading-none">100 MWc+</div><div class="text-[10px] text-[#8FA6C6] mt-1">accompagnés</div></div>
+      </div>
+      <div class="absolute -right-4 -bottom-6 glass rounded-2xl px-4 py-3 flex items-center gap-3 float-slow" style="animation-delay:-4s">
+        <div class="w-9 h-9 rounded-lg bg-green/20 flex items-center justify-center"><i class="ti ti-shield-check text-green text-lg"></i></div>
+        <div><div class="font-heading font-bold text-sm leading-none">Normes NF / UTE</div><div class="text-[10px] text-[#8FA6C6] mt-1">100 % conformes</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Indicateur de scroll -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#8FA6C6]" aria-hidden="true">
+    Défiler
+    <span class="w-5 h-8 rounded-full border border-white/30 flex justify-center pt-1.5"><span class="w-1 h-1.5 rounded-full bg-orange scroll-cue"></span></span>
+  </div>
+  <div class="absolute bottom-0 inset-x-0 h-px bg-linear-to-r from-transparent via-orange/70 to-transparent"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CLIENTS — défilement continu
+═══════════════════════════════════════════════════════════════ -->
+<section class="bg-navy-950 py-8 border-b border-white/5" aria-label="Ils nous font confiance">
+  <p class="text-center text-[11px] uppercase tracking-[0.3em] text-[#6A85A8] mb-5">Ils nous font confiance</p>
+  <div class="marquee">
+    <div class="marquee-track">
+      @for (round of [1, 2]; track round) {
+        @for (c of clients; track c) {
+          <span class="font-heading font-bold text-lg md:text-xl text-white/45 hover:text-orange transition-colors duration-300 whitespace-nowrap cursor-default">{{ c }}</span>
+        }
+      }
+    </div>
   </div>
 </section>
 
-<!-- Bande séparatrice orange fine -->
-<div class="h-0.5 bg-linear-to-r from-orange via-orange/50 to-transparent"></div>
+<!-- ═══════════════════════════════════════════════════════════════
+     CHIFFRES CLÉS
+═══════════════════════════════════════════════════════════════ -->
+<section class="relative bg-white py-16 md:py-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-3xl overflow-hidden border border-border">
+      @for (s of stats; track s.label; let i = $index) {
+        <div appScrollReveal="zoom" [class]="'sr-delay-' + (i + 1)" class="group bg-white p-7 md:p-10 hover:bg-offwhite transition-colors duration-300">
+          <i [class]="'ti ' + s.icon + ' text-2xl text-orange mb-5 block group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 origin-left'"></i>
+          <div class="font-heading text-3xl md:text-4xl xl:text-5xl font-extrabold text-navy leading-none tracking-tight whitespace-nowrap">
+            <span [appCountUp]="s.value" [prefix]="s.prefix" [suffix]="s.suffix">{{ s.prefix }}{{ s.value }}{{ s.suffix }}</span>
+          </div>
+          <div class="h-0.5 w-10 bg-linear-to-r from-orange to-green my-4 group-hover:w-20 transition-all duration-500"></div>
+          <div class="text-muted text-sm leading-snug">{{ s.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
 
 <!-- ═══════════════════════════════════════════════════════════════
      TROIS MISSIONS
 ═══════════════════════════════════════════════════════════════ -->
-<section class="bg-offwhite py-14 md:py-20">
+<section class="bg-offwhite py-16 md:py-24">
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
     <app-section-header
       appScrollReveal="fade-up"
@@ -85,23 +182,70 @@
       subtitle="De l'avant-projet à la réception, DNS Africa intervient à chaque phase de votre projet photovoltaïque."
     />
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       @for (m of missions; track m.title; let i = $index) {
-        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i + 1)"
-             class="card-hover bg-white border border-border rounded-xl overflow-hidden">
-          <div [class]="'h-1 ' + m.accentClass"></div>
-          <div class="p-6">
-            <div [class]="'w-10 h-10 rounded-lg flex items-center justify-center mb-4 ' + m.iconBg">
-              <i [class]="'ti ' + m.icon + ' text-xl ' + m.iconColor"></i>
+        <article appScrollReveal="fade-up" [class]="'sr-delay-' + (i + 1)">
+          <div appSpotlight class="glow-card h-full bg-white border border-border rounded-2xl overflow-hidden">
+            <div [class]="'h-1.5 ' + m.accentClass"></div>
+            <div class="p-7 relative">
+              <span class="absolute top-5 right-6 font-heading text-6xl font-extrabold text-navy/5 select-none">{{ m.n }}</span>
+              <div [class]="'w-12 h-12 rounded-xl flex items-center justify-center mb-5 ' + m.iconBg">
+                <i [class]="'ti ' + m.icon + ' text-2xl ' + m.iconColor"></i>
+              </div>
+              <h3 class="font-heading text-navy font-bold text-lg mb-3">{{ m.title }}</h3>
+              <p class="text-muted text-sm leading-relaxed mb-5">{{ m.desc }}</p>
+              <span [class]="'inline-block text-xs font-semibold px-3 py-1 rounded-full ' + m.tagClass">{{ m.tag }}</span>
             </div>
-            <h3 class="font-heading text-navy font-semibold text-base mb-2">{{ m.title }}</h3>
-            <p class="text-muted text-sm leading-relaxed mb-4">{{ m.desc }}</p>
-            <span [class]="'inline-block text-xs font-semibold px-2.5 py-1 rounded ' + m.tagClass">
-              {{ m.tag }}
-            </span>
           </div>
-        </div>
+        </article>
       }
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PRÉSENCE — carte stylisée
+═══════════════════════════════════════════════════════════════ -->
+<section class="relative bg-hero text-white py-16 md:py-24 overflow-hidden">
+  <div class="absolute inset-0 dot-bg opacity-60" aria-hidden="true"></div>
+  <div class="orb orb-a w-[420px] h-[420px] bg-orange/15 top-0 left-1/3" aria-hidden="true"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
+    <div appScrollReveal="fade-up">
+      <app-section-header
+        [dark]="true"
+        badge="Présence internationale"
+        title="Du Vieux Continent au Sahel"
+        subtitle="Basés entre Tunis et la France, nous pilotons des projets sur trois continents avec les référentiels locaux : Enedis, STEG, SOMELEC, SONELEC."
+      />
+      <ul class="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-[#C0D0E8]">
+        <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-orange"></span>France</li>
+        @for (c of countries; track c.name) {
+          <li class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-green"></span>{{ c.name }}</li>
+        }
+      </ul>
+    </div>
+
+    <div appScrollReveal="zoom" class="glass rounded-3xl p-3 md:p-5">
+      <svg viewBox="0 0 800 460" class="w-full h-auto" role="img" aria-label="Carte des zones d'intervention de DNS Africa : France, Maroc, Tunisie, Mauritanie, Niger et DOM-TOM">
+        <defs>
+          <radialGradient id="hubGlow"><stop offset="0" stop-color="#F7941D" stop-opacity=".55"/><stop offset="1" stop-color="#F7941D" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle [attr.cx]="hub.x" [attr.cy]="hub.y" r="70" fill="url(#hubGlow)"/>
+        @for (c of countries; track c.name) {
+          <path [attr.d]="c.path" stroke="#4AAD52" stroke-opacity=".25" stroke-width="1.5" fill="none"/>
+          <path [attr.d]="c.path" stroke="#F7941D" stroke-width="2" fill="none" class="flow-path" [style.animation-delay]="c.delay"/>
+        }
+        <!-- Hub France -->
+        <circle [attr.cx]="hub.x" [attr.cy]="hub.y" r="7" fill="#F7941D"/>
+        <circle [attr.cx]="hub.x" [attr.cy]="hub.y" r="7" fill="#F7941D" class="ping"/>
+        <text [attr.x]="hub.x + 16" [attr.y]="hub.y + 5" fill="#fff" font-size="15" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">France</text>
+        @for (c of countries; track c.name) {
+          <circle [attr.cx]="c.x" [attr.cy]="c.y" r="5" fill="#4AAD52"/>
+          <circle [attr.cx]="c.x" [attr.cy]="c.y" r="5" fill="#4AAD52" class="ping" [style.animation-delay]="c.delay"/>
+          <text [attr.x]="c.x + 14" [attr.y]="c.y + 5" fill="#fff" font-size="14" font-weight="600" font-family="Plus Jakarta Sans, sans-serif">{{ c.name }}</text>
+        }
+      </svg>
     </div>
   </div>
 </section>
@@ -109,24 +253,26 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTEURS
 ═══════════════════════════════════════════════════════════════ -->
-<section class="bg-white py-14 md:py-20">
+<section class="bg-white py-16 md:py-24">
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
     <app-section-header
       appScrollReveal="fade-up"
       badge="Marchés"
       title="Secteurs & typologies de projets"
+      subtitle="Des toitures tertiaires aux centrales HTA avec stockage : toutes les échelles, un même niveau d'exigence."
     />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       @for (s of secteurs; track s.title; let i = $index) {
-        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i + 1)"
-             class="card-hover flex items-start gap-3 border border-border rounded-xl p-4 bg-white hover:border-orange/40">
-          <div [class]="'w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ' + s.bgClass">
-            <i [class]="'ti ' + s.icon + ' text-base ' + s.iconClass"></i>
-          </div>
-          <div>
-            <h4 class="font-heading font-semibold text-navy text-sm mb-0.5">{{ s.title }}</h4>
-            <p class="text-muted text-xs">{{ s.desc }}</p>
+        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i % 3 + 1)">
+          <div appSpotlight class="glow-card h-full flex items-start gap-4 border border-border rounded-2xl p-5 bg-white">
+            <div [class]="'w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ' + s.bgClass">
+              <i [class]="'ti ' + s.icon + ' text-xl ' + s.iconClass"></i>
+            </div>
+            <div>
+              <h3 class="font-heading font-bold text-navy text-base mb-1">{{ s.title }}</h3>
+              <p class="text-muted text-sm">{{ s.desc }}</p>
+            </div>
           </div>
         </div>
       }
@@ -135,40 +281,49 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CLIENTS
+     MÉTHODE
 ═══════════════════════════════════════════════════════════════ -->
-<section class="bg-offwhite py-14 md:py-20">
+<section class="bg-offwhite py-16 md:py-24">
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
     <app-section-header
       appScrollReveal="fade-up"
-      badge="Clients cibles"
-      title="Ils nous font confiance"
-      subtitle="EPC solaires · Développeurs · Bureaux d'études AMO · Promoteurs · Collectivités · Industriels"
+      [center]="true"
+      badge="Notre méthode"
+      title="Cinq étapes, zéro surprise"
+      subtitle="Un processus clair, des délais tenus et des livrables prêts pour l'exécution."
     />
 
-    <div appScrollReveal="fade-up" class="flex flex-wrap gap-2.5">
-      @for (c of clients; track c) {
-        <span class="bg-white border border-border rounded-lg px-4 py-2 text-xs font-semibold text-navy hover:border-orange/50 hover:text-orange transition-colors duration-150 cursor-default">
-          {{ c }}
-        </span>
+    <div class="relative grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
+      <div appScrollReveal="fade-in" class="line-grow hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-linear-to-r from-orange via-orange/60 to-green"></div>
+      @for (st of steps; track st.title; let i = $index) {
+        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i + 1)" class="relative text-center">
+          <div class="relative z-10 w-16 h-16 mx-auto mb-4 rounded-full bg-white border-2 border-orange text-orange flex items-center justify-center shadow-lg shadow-orange/15 hover:bg-orange hover:text-white hover:scale-110 transition-all duration-300">
+            <i [class]="'ti ' + st.icon + ' text-2xl'"></i>
+          </div>
+          <div class="text-[11px] font-semibold tracking-widest text-orange mb-1">ÉTAPE {{ i + 1 }}</div>
+          <h3 class="font-heading font-bold text-navy text-base mb-1">{{ st.title }}</h3>
+          <p class="text-muted text-sm leading-snug px-2">{{ st.desc }}</p>
+        </div>
       }
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CTA BAND — orange pour attirer l'oeil
+     CTA FINAL
 ═══════════════════════════════════════════════════════════════ -->
-<section class="bg-navy py-12">
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
-    <div>
-      <h2 class="font-heading text-xl md:text-2xl font-bold text-white mb-1">Votre projet commence ici</h2>
-      <p class="text-[#8AABCC] text-sm">Devis gratuit sous 24h · Réponse garantie</p>
-    </div>
+<section class="relative bg-hero text-white py-20 md:py-28 overflow-hidden text-center">
+  <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
+  <div class="orb orb-a w-[500px] h-[500px] bg-orange/25 -top-60 left-1/2 -translate-x-1/2" aria-hidden="true"></div>
+  <div appScrollReveal="fade-up" class="relative max-w-3xl mx-auto px-6">
+    <h2 class="font-heading text-3xl md:text-5xl font-extrabold tracking-tight mb-5 leading-tight">
+      Votre prochain projet solaire <span class="text-gradient">commence ici</span>
+    </h2>
+    <p class="text-[#B8C9E3] text-base md:text-lg mb-10">Devis gratuit sous 24 h · Étude de faisabilité offerte sur votre premier dossier</p>
     <a routerLink="/contact"
-       class="shrink-0 inline-flex items-center gap-2 bg-orange hover:bg-orange-600 text-white font-semibold text-sm px-7 py-3.5 rounded-lg transition-colors duration-200 shadow-sm">
+       class="btn-shine inline-flex items-center gap-2.5 bg-orange hover:bg-orange-600 text-white font-semibold px-9 py-4 rounded-full shadow-lg shadow-orange/30">
       Demander un devis gratuit
-      <i class="ti ti-arrow-right"></i>
+      <i class="ti ti-arrow-up-right"></i>
     </a>
   </div>
 </section>

@@ -17,6 +17,7 @@ interface NavLink {
 export class NavbarComponent {
   menuOpen = signal(false);
   scrolled = signal(false);
+  progress = signal(0);
 
   readonly navLinks: NavLink[] = [
     { path: '/',             label: 'Accueil',      exact: true },
@@ -37,6 +38,8 @@ export class NavbarComponent {
 
   @HostListener('window:scroll')
   onScroll(): void {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
     this.scrolled.set(window.scrollY > 40);
+    this.progress.set(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
   }
 }

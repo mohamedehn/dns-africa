@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PageHeroComponent } from '../../shared/components/page-hero/page-hero';
 import { SectionHeaderComponent } from '../../shared/components/section-header/section-header';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
@@ -24,7 +25,7 @@ interface Step {
 @Component({
   selector: 'app-offre',
   standalone: true,
-  imports: [SectionHeaderComponent, ScrollRevealDirective],
+  imports: [PageHeroComponent, SectionHeaderComponent, ScrollRevealDirective],
   templateUrl: './offre.html',
   styleUrl: './offre.css'
 })

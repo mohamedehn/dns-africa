@@ -1,12 +1,12 @@
 import { Component, signal, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { SectionHeaderComponent } from '../../shared/components/section-header/section-header';
+import { PageHeroComponent } from '../../shared/components/page-hero/page-hero';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ReactiveFormsModule, SectionHeaderComponent, ScrollRevealDirective],
+  imports: [PageHeroComponent, ReactiveFormsModule, ScrollRevealDirective],
   templateUrl: './contact.html',
   styleUrl: './contact.css'
 })
