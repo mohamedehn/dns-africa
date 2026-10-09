@@ -62,7 +62,7 @@ export class ContactComponent {
 
     fetch('https://formspree.io/f/mzdoynge', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         _subject:  `📧 DNS Africa — ${v.prestation}`,
         _replyto:  v.email,
