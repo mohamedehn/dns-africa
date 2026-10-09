@@ -5,7 +5,8 @@ import {
 } from '@angular/core';
 import {
   provideRouter,
-  withInMemoryScrolling
+  withInMemoryScrolling,
+  withViewTransitions
 } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -17,7 +18,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideRouter(
       routes,
-      withInMemoryScrolling({ scrollPositionRestoration: 'top' })
+      withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      withViewTransitions()
     )
   ]
 };

@@ -292,3 +292,72 @@
 }
 
 .bg-hero h1, .bg-hero h2, .bg-hero h3 { color: #fff; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PHOTOS, TIMELINE, CURSEUR, TRANSITIONS DE PAGE
+═══════════════════════════════════════════════════════════════ */
+:root { --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes kenburns { from { scale: 1; } to { scale: 1.1; } }
+@keyframes sun-pulse { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.12); opacity: 1; } }
+@keyframes menu-pop { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+
+@layer components {
+  .animate-kenburns { animation: kenburns 26s ease-in-out infinite alternate; transform-origin: 60% 50%; }
+  .animate-sun-pulse { animation: sun-pulse 7s ease-in-out infinite; }
+
+  /* Titres révélés ligne par ligne */
+  .reveal-lines .line { display: block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+  .reveal-lines .line > span {
+    display: inline-block; transform: translateY(115%) rotate(3deg); transform-origin: left bottom;
+    transition: transform 1.2s var(--ease-out-expo); transition-delay: calc(var(--d, 0) * 110ms + 150ms);
+  }
+  .reveal-lines.is-in .line > span { transform: none; }
+
+  /* Carte photo : zoom, voile, contenu qui monte au survol */
+  .photo-card { position: relative; overflow: hidden; border-radius: 1.5rem; isolation: isolate; background: #0a1230; }
+  .photo-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease-out-expo), filter .6s ease; }
+  .photo-card:hover > img { transform: scale(1.09); }
+  .photo-card::after {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(10,18,48,.95) 0%, rgba(10,18,48,.55) 40%, rgba(10,18,48,.05) 75%);
+    transition: opacity .5s ease;
+  }
+  .photo-card .photo-body { position: relative; z-index: 2; transition: transform .6s var(--ease-out-expo); }
+  .photo-card:hover .photo-body { transform: translateY(-6px); }
+  .photo-card .photo-line { height: 3px; width: 2.5rem; background: linear-gradient(90deg, #F7941D, #4AAD52); border-radius: 3px; transition: width .6s var(--ease-out-expo); }
+  .photo-card:hover .photo-line { width: 5rem; }
+
+  /* Masque de fondu pour photos de hero */
+  .mask-fade-left {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.3) 30%, #000 65%);
+            mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.3) 30%, #000 65%);
+  }
+
+  /* Timeline pilotée par le scroll (--p) */
+  .tl-fill { transform-origin: top; transform: scaleY(var(--p, 0)); background: linear-gradient(180deg, #F7941D, #4AAD52); box-shadow: 0 0 18px rgba(247,148,29,.6); }
+  .tl-step { --on: clamp(0, calc((var(--p, 0) - var(--i, 0) * 0.17) * 7), 1); opacity: calc(0.3 + var(--on) * 0.7); }
+  .tl-node {
+    background: color-mix(in srgb, #F7941D calc(var(--on) * 100%), #152358);
+    border-color: color-mix(in srgb, #F7941D calc(var(--on) * 100%), rgba(255,255,255,.2));
+    box-shadow: 0 0 calc(var(--on) * 34px) rgba(247,148,29, calc(var(--on) * .55));
+    transform: scale(calc(.9 + var(--on) * .1));
+  }
+
+  /* Curseur */
+  .cursor-ring, .cursor-glow {
+    position: fixed; top: 0; left: 0; pointer-events: none; opacity: 0;
+    transition: opacity .4s, width .3s var(--ease-out-expo), height .3s var(--ease-out-expo), margin .3s var(--ease-out-expo), background .3s;
+  }
+  .cursor-ring { z-index: 200; width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1.5px solid rgba(247,148,29,.95); border-radius: 50%; mix-blend-mode: difference; }
+  .cursor-ring.is-hover { width: 64px; height: 64px; margin: -32px 0 0 -32px; background: rgba(247,148,29,.2); }
+  .cursor-glow { z-index: 1; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; background: radial-gradient(circle, rgba(247,148,29,.07), transparent 60%); }
+  .cursor-ring.is-visible, .cursor-glow.is-visible { opacity: 1; }
+
+  .reveal-lines-fallback { opacity: 1; }
+}
+
+/* Transition fluide entre pages (View Transitions API) */
+::view-transition-old(root) { animation: .25s ease both fadeOutPage; }
+::view-transition-new(root) { animation: .45s var(--ease-out-expo) both fadeUp; }
+@keyframes fadeOutPage { to { opacity: 0; } }

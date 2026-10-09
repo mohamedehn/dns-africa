@@ -4,11 +4,14 @@ import { SectionHeaderComponent } from '../../shared/components/section-header/s
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 import { CountUpDirective } from '../../shared/directives/count-up.directive';
 import { SpotlightDirective } from '../../shared/directives/spotlight.directive';
+import { LinesDirective, MagneticDirective, ParallaxDirective, ScrollProgressDirective, TiltDirective } from '../../shared/directives/motion.directives';
+import { EnergyCanvasComponent } from '../../shared/components/energy-canvas/energy-canvas';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, SectionHeaderComponent, ScrollRevealDirective, CountUpDirective, SpotlightDirective],
+  imports: [RouterLink, SectionHeaderComponent, ScrollRevealDirective, CountUpDirective, SpotlightDirective,
+    LinesDirective, MagneticDirective, ParallaxDirective, ScrollProgressDirective, TiltDirective, EnergyCanvasComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -25,6 +28,8 @@ export class HomeComponent {
     { value: 24,  prefix: '< ', suffix: ' h',   label: 'pour recevoir votre devis', icon: 'ti-clock-bolt' },
     { value: 100, prefix: '',   suffix: ' %',   label: 'de livrables normés NF / UTE', icon: 'ti-certificate' }
   ];
+
+  readonly rays = Array.from({ length: 24 }, (_, i) => i * 15);
 
   readonly months = [28, 34, 48, 62, 78, 90, 100, 94, 74, 55, 36, 26];
 
@@ -49,13 +54,17 @@ export class HomeComponent {
     }
   ];
 
-  readonly secteurs = [
-    { icon: 'ti-solar-panel',      bgClass: 'bg-orange-100', iconClass: 'text-orange', title: 'Centrales au sol',            desc: '50 kWc – 50 MWc · HTA · BESS' },
-    { icon: 'ti-car-garage',       bgClass: 'bg-blue-100',   iconClass: 'text-navy',   title: 'Ombrières PV',                desc: 'Parkings, zones commerciales' },
-    { icon: 'ti-building-factory', bgClass: 'bg-green-100',  iconClass: 'text-green',  title: 'Toitures industrielles',      desc: 'Entrepôts, plateformes logistiques' },
-    { icon: 'ti-building',         bgClass: 'bg-orange-100', iconClass: 'text-orange', title: 'Toitures tertiaires',         desc: 'Bureaux, hôtels, commerces' },
-    { icon: 'ti-arrows-exchange',  bgClass: 'bg-blue-100',   iconClass: 'text-navy',   title: 'Autoconsommation collective', desc: 'Résidences, ZAC, bailleurs' },
-    { icon: 'ti-battery-charging', bgClass: 'bg-green-100',  iconClass: 'text-green',  title: 'BESS / Stockage',             desc: 'Dimensionnement, intégration BMS' }
+  /** Secteurs illustrés par une photo */
+  readonly secteursPhoto = [
+    { img: '/images/centrale-solaire.jpg',     alt: "Vue aérienne d'une centrale solaire au sol",          icon: 'ti-solar-panel',      title: 'Centrales au sol',       desc: '50 kWc – 50 MWc · HTA · BESS' },
+    { img: '/images/ombriere-pv.jpg',          alt: 'Ombrière photovoltaïque de parking',                    icon: 'ti-car-garage',       title: 'Ombrières PV',           desc: 'Parkings, zones commerciales' },
+    { img: '/images/toiture-industrielle.jpg', alt: 'Toiture industrielle équipée de panneaux solaires',     icon: 'ti-building-factory', title: 'Toitures industrielles', desc: 'Entrepôts, plateformes logistiques' },
+    { img: '/images/batiment-tertiaire.jpg',   alt: "Façade vitrée d'un bâtiment tertiaire",                icon: 'ti-building',         title: 'Toitures tertiaires',    desc: 'Bureaux, hôtels, commerces' }
+  ];
+
+  readonly secteursIcon = [
+    { icon: 'ti-arrows-exchange',  title: 'Autoconsommation collective', desc: 'Résidences, ZAC, bailleurs' },
+    { icon: 'ti-battery-charging', title: 'BESS / Stockage',             desc: 'Dimensionnement, intégration BMS' }
   ];
 
   /** Positions sur la carte stylisée (viewBox 800 × 460) */

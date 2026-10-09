@@ -1,29 +1,43 @@
 <!-- ═══════════════════════════════════════════════════════════════
-     HERO — plein écran, fond sombre animé
+     HERO — photo plein format, flux d'énergie, soleil orbital
 ═══════════════════════════════════════════════════════════════ -->
 <section class="relative overflow-hidden bg-hero text-white min-h-[calc(100svh-4.5rem)] flex items-center">
+  <!-- Photo -->
+  <div class="absolute inset-y-0 right-0 w-full lg:w-[72%] overflow-hidden mask-fade-left opacity-40 lg:opacity-100" aria-hidden="true">
+    <img appParallax="0.05"
+         src="/images/centrale-solaire.jpg" alt="" width="1600" height="1066" fetchpriority="high"
+         class="animate-kenburns absolute -top-[6%] left-0 w-full h-[112%] object-cover object-[64%_50%]">
+    <div class="absolute inset-0 bg-linear-to-r from-navy-950/60 via-transparent to-navy-900/30"></div>
+    <div class="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-navy-950/70 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-navy-950 via-navy-950/60 to-transparent"></div>
+  </div>
   <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
-  <div class="orb orb-a w-[520px] h-[520px] bg-orange/25 -top-40 right-[-8rem]" aria-hidden="true"></div>
-  <div class="orb orb-b w-[460px] h-[460px] bg-green/20 bottom-[-12rem] left-[-6rem]" aria-hidden="true"></div>
+  <div class="orb orb-a w-130 h-130 bg-orange/20 -top-40 -right-32" aria-hidden="true"></div>
+  <div class="orb orb-b w-115 h-115 bg-green/15 -bottom-48 -left-24" aria-hidden="true"></div>
 
-  <!-- Soleil orbital géant -->
-  <svg class="absolute -right-56 top-1/2 -translate-y-1/2 w-[900px] h-[900px] opacity-40 pointer-events-none hidden md:block" viewBox="0 0 400 400" fill="none" aria-hidden="true">
-    <g class="spin-slow" style="transform-origin:200px 200px">
-      <circle cx="200" cy="200" r="190" stroke="#F7941D" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 10"/>
-      <circle cx="200" cy="200" r="150" stroke="#fff" stroke-opacity=".18" stroke-width="1"/>
-      <circle cx="390" cy="200" r="5" fill="#F7941D"/>
-    </g>
-    <g class="spin-rev" style="transform-origin:200px 200px">
-      <circle cx="200" cy="200" r="110" stroke="#4AAD52" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="1 9"/>
-      <circle cx="90" cy="200" r="4" fill="#4AAD52"/>
-    </g>
-  </svg>
+  <!-- Flux d'énergie -->
+  <app-energy-canvas />
 
-  <div class="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
+  <!-- Soleil rayonnant -->
+  <div class="absolute -top-56 -right-52 w-176 h-176 pointer-events-none hidden md:block" aria-hidden="true">
+    <div class="absolute inset-0 rounded-full animate-sun-pulse"
+         style="background: radial-gradient(circle, rgba(255,205,120,.4) 0%, rgba(247,148,29,.16) 28%, transparent 62%)"></div>
+    <svg class="absolute inset-0 w-full h-full spin-rev" viewBox="-100 -100 200 200" fill="none">
+      <defs>
+        <linearGradient id="dnsRay" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-100">
+          <stop offset="0" stop-color="#FFD08A" stop-opacity=".35"/><stop offset="1" stop-color="#F7941D" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      @for (a of rays; track a; let i = $index) {
+        <path [attr.d]="i % 2 ? 'M0 0 L-2.2 -78 L2.2 -78Z' : 'M0 0 L-3.4 -99 L3.4 -99Z'" [attr.transform]="'rotate(' + a + ')'" fill="url(#dnsRay)"/>
+      }
+      <circle r="9" fill="#FFE9C4" fill-opacity=".9"/><circle r="15" fill="#F7941D" fill-opacity=".25"/>
+    </svg>
+  </div>
 
-    <!-- Colonne texte -->
-    <div>
-      <div class="hero-badge inline-flex items-center gap-2.5 bg-white/8 border border-white/15 text-orange text-xs font-semibold tracking-[0.18em] uppercase px-4 py-2 rounded-full mb-8 backdrop-blur">
+  <div class="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-28 md:pt-24">
+    <div class="max-w-3xl">
+      <div class="hero-badge inline-flex items-center gap-2.5 glass text-orange text-xs font-semibold tracking-[0.18em] uppercase px-4 py-2 rounded-full mb-8">
         <span class="relative flex w-2 h-2">
           <span class="absolute inset-0 rounded-full bg-green opacity-75 animate-ping"></span>
           <span class="relative w-2 h-2 rounded-full bg-green"></span>
@@ -31,103 +45,72 @@
         Bureau d'études indépendant · Europe &amp; Afrique
       </div>
 
-      <h1 class="font-heading text-white text-[2.7rem] sm:text-6xl lg:text-[4.4rem] font-extrabold leading-[1.04] tracking-tight mb-7">
-        @for (w of titleWords; track w.text; let i = $index) {
-          <span class="word-mask mr-[0.22em]">
-            <span [style.animation-delay]="(0.15 + i * 0.14) + 's'" [class]="w.accent ? 'text-gradient' : ''">{{ w.text }}</span>
-          </span>
-        }
+      <h1 appLines class="font-heading text-white text-[2.7rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight mb-7">
+        <span class="line"><span style="--d:0">Ingénierie solaire</span></span>
+        <span class="line"><span style="--d:1" class="text-gradient">d'envergure</span></span>
       </h1>
 
-      <p class="hero-sub text-[#B8C9E3] text-base md:text-lg leading-relaxed mb-10 max-w-xl">
+      <p class="hero-sub text-[#C4D3EA] text-base md:text-xl leading-relaxed mb-10 max-w-xl">
         De la faisabilité à la réception : études, ingénierie d'exécution, AMO et supervision de chantier
         pour les plus grandes centrales solaires de <strong class="text-white font-semibold">France, du Maghreb et d'Afrique francophone</strong>.
       </p>
 
       <div class="hero-ctas flex flex-wrap gap-4 mb-12">
-        <a routerLink="/contact"
+        <a routerLink="/contact" appMagnetic
            class="btn-shine inline-flex items-center gap-2.5 bg-orange hover:bg-orange-600 text-white font-semibold text-sm px-8 py-4 rounded-full shadow-lg shadow-orange/30">
-          Demander un devis
-          <i class="ti ti-arrow-up-right"></i>
+          Demander un devis <i class="ti ti-arrow-up-right"></i>
         </a>
-        <a routerLink="/savoir-faire"
-           class="group inline-flex items-center gap-2.5 border border-white/25 hover:border-orange hover:bg-white/5 text-white text-sm font-medium px-8 py-4 rounded-full transition-all duration-300">
-          Découvrir nos expertises
-          <i class="ti ti-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+        <a routerLink="/savoir-faire" appMagnetic
+           class="group inline-flex items-center gap-2.5 border border-white/30 hover:border-orange hover:bg-white/5 text-white text-sm font-medium px-8 py-4 rounded-full transition-all duration-300 backdrop-blur-sm">
+          Découvrir nos expertises <i class="ti ti-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
         </a>
       </div>
 
-      <div class="hero-stats flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-[#8FA6C6]">
+      <div class="hero-stats flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-[#A9BCD8]">
         <span class="inline-flex items-center gap-2"><i class="ti ti-circle-check text-green text-base"></i>PVsyst · PVGIS</span>
         <span class="inline-flex items-center gap-2"><i class="ti ti-circle-check text-green text-base"></i>NF C 15-100 · UTE C 15-712</span>
         <span class="inline-flex items-center gap-2"><i class="ti ti-circle-check text-green text-base"></i>Enedis · STEG · SOMELEC</span>
       </div>
     </div>
+  </div>
 
-    <!-- Colonne visuel : tableau de bord de production -->
-    <div class="hero-img relative hidden lg:block">
-      <div class="glass rounded-3xl p-6 float-slow">
-        <div class="flex items-center justify-between mb-5">
-          <div>
-            <div class="text-[11px] uppercase tracking-[0.18em] text-[#8FA6C6]">Simulation · exemple illustratif</div>
-            <div class="font-heading font-bold text-lg text-white whitespace-nowrap">Centrale 12 MWc · HTA</div>
-          </div>
-          <span class="inline-flex items-center gap-1.5 whitespace-nowrap text-[11px] font-semibold text-green bg-green/15 px-2.5 py-1 rounded-full">
-            <span class="w-1.5 h-1.5 rounded-full bg-green animate-pulse"></span>P50 / P90
-          </span>
+  <!-- Carte de simulation flottante -->
+  <div class="hero-img hidden xl:block absolute bottom-24 right-12 2xl:right-24 z-10 w-96">
+    <div appTilt="6" class="glass rounded-3xl p-5 float-slow" style="background: rgba(10,18,48,.62)">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <div class="text-[10px] uppercase tracking-[0.18em] text-[#A9BCD8]">Exemple illustratif</div>
+          <div class="font-heading font-bold text-white whitespace-nowrap">Centrale 12 MWc · HTA</div>
         </div>
-
-        <svg viewBox="0 0 480 250" class="w-full" role="img" aria-label="Courbe de production solaire journalière et production mensuelle">
-          <defs>
-            <linearGradient id="curveFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F7941D" stop-opacity=".45"/>
-              <stop offset="1" stop-color="#F7941D" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          @for (i of [0,1,2,3]; track i) {
-            <line x1="0" [attr.y1]="30 + i * 40" x2="480" [attr.y2]="30 + i * 40" stroke="#fff" stroke-opacity=".08"/>
-          }
-          <path d="M0 150 C80 150 110 30 240 30 S400 150 480 150 L480 150 L0 150Z" fill="url(#curveFill)"/>
-          <path d="M0 150 C80 150 110 30 240 30 S400 150 480 150" stroke="#F7941D" stroke-width="3" stroke-linecap="round" fill="none" class="draw-path" pathLength="1000"/>
-          <circle cx="240" cy="30" r="5" fill="#fff"/>
-          <circle cx="240" cy="30" r="5" fill="#F7941D" class="ping"/>
-          @for (m of months; track $index; let i = $index) {
-            <rect [attr.x]="6 + i * 39.5" [attr.y]="245 - m * 0.8" width="26" [attr.height]="m * 0.8" rx="5"
-                  [attr.fill]="i % 3 === 0 ? '#4AAD52' : '#ffffff'" [attr.fill-opacity]="i % 3 === 0 ? 0.95 : 0.35"
-                  class="bar" [style.animation-delay]="(0.9 + i * 0.07) + 's'"/>
-          }
-        </svg>
-
-        <div class="grid grid-cols-3 gap-3 mt-5">
-          <div class="rounded-xl bg-white/5 border border-white/10 px-3 py-2.5">
-            <div class="text-[10px] uppercase tracking-wider text-[#8FA6C6]">Productible</div>
-            <div class="font-heading font-bold text-orange">1 780 kWh/kWc</div>
-          </div>
-          <div class="rounded-xl bg-white/5 border border-white/10 px-3 py-2.5">
-            <div class="text-[10px] uppercase tracking-wider text-[#8FA6C6]">PR</div>
-            <div class="font-heading font-bold text-green">84 %</div>
-          </div>
-          <div class="rounded-xl bg-white/5 border border-white/10 px-3 py-2.5">
-            <div class="text-[10px] uppercase tracking-wider text-[#8FA6C6]">TRI projet</div>
-            <div class="font-heading font-bold text-white">11,2 %</div>
-          </div>
-        </div>
+        <span class="inline-flex items-center gap-1.5 whitespace-nowrap text-[10px] font-semibold text-green bg-green/15 px-2.5 py-1 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-green animate-pulse"></span>P50 / P90
+        </span>
       </div>
-
-      <!-- Pastilles flottantes -->
-      <div class="absolute -left-12 -top-6 glass rounded-2xl px-4 py-3 flex items-center gap-3 float-slow" style="animation-delay:-2s">
-        <div class="w-9 h-9 rounded-lg bg-orange/20 flex items-center justify-center"><i class="ti ti-bolt text-orange text-lg"></i></div>
-        <div><div class="font-heading font-bold text-sm leading-none">100 MWc+</div><div class="text-[10px] text-[#8FA6C6] mt-1">accompagnés</div></div>
-      </div>
-      <div class="absolute -right-4 -bottom-6 glass rounded-2xl px-4 py-3 flex items-center gap-3 float-slow" style="animation-delay:-4s">
-        <div class="w-9 h-9 rounded-lg bg-green/20 flex items-center justify-center"><i class="ti ti-shield-check text-green text-lg"></i></div>
-        <div><div class="font-heading font-bold text-sm leading-none">Normes NF / UTE</div><div class="text-[10px] text-[#8FA6C6] mt-1">100 % conformes</div></div>
+      <svg viewBox="0 0 480 190" class="w-full" role="img" aria-label="Courbe de production solaire journalière et production mensuelle">
+        <defs>
+          <linearGradient id="curveFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F7941D" stop-opacity=".5"/><stop offset="1" stop-color="#F7941D" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 110 C80 110 110 15 240 15 S400 110 480 110 L480 110 L0 110Z" fill="url(#curveFill)"/>
+        <path d="M0 110 C80 110 110 15 240 15 S400 110 480 110" stroke="#F7941D" stroke-width="3" stroke-linecap="round" fill="none" class="draw-path" pathLength="1000"/>
+        <circle cx="240" cy="15" r="5" fill="#fff"/><circle cx="240" cy="15" r="5" fill="#F7941D" class="ping"/>
+        @for (m of months; track $index; let i = $index) {
+          <rect [attr.x]="6 + i * 39.5" [attr.y]="186 - m * 0.62" width="26" [attr.height]="m * 0.62" rx="5"
+                [attr.fill]="i % 3 === 0 ? '#4AAD52' : '#ffffff'" [attr.fill-opacity]="i % 3 === 0 ? 0.95 : 0.35"
+                class="bar" [style.animation-delay]="(0.9 + i * 0.07) + 's'"/>
+        }
+      </svg>
+      <div class="grid grid-cols-3 gap-2 mt-3">
+        <div class="rounded-xl bg-white/5 border border-white/10 px-2.5 py-2"><div class="text-[9px] uppercase tracking-wider text-[#A9BCD8]">Productible</div><div class="font-heading font-bold text-orange text-xs">1 780 kWh/kWc</div></div>
+        <div class="rounded-xl bg-white/5 border border-white/10 px-2.5 py-2"><div class="text-[9px] uppercase tracking-wider text-[#A9BCD8]">PR</div><div class="font-heading font-bold text-green text-xs">84 %</div></div>
+        <div class="rounded-xl bg-white/5 border border-white/10 px-2.5 py-2"><div class="text-[9px] uppercase tracking-wider text-[#A9BCD8]">TRI projet</div><div class="font-heading font-bold text-white text-xs">11,2 %</div></div>
       </div>
     </div>
   </div>
 
   <!-- Indicateur de scroll -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#8FA6C6]" aria-hidden="true">
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-[#A9BCD8]" aria-hidden="true">
     Défiler
     <span class="w-5 h-8 rounded-full border border-white/30 flex justify-center pt-1.5"><span class="w-1 h-1.5 rounded-full bg-orange scroll-cue"></span></span>
   </div>
@@ -151,19 +134,29 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CHIFFRES CLÉS
+     CHIFFRES CLÉS — sur photo en parallaxe
 ═══════════════════════════════════════════════════════════════ -->
-<section class="relative bg-white py-16 md:py-24 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-3xl overflow-hidden border border-border">
+<section class="relative overflow-hidden py-20 md:py-28 text-white">
+  <img appParallax="0.1" src="/images/toiture-industrielle.jpg" alt="" width="1400" height="788" loading="lazy"
+       class="absolute inset-x-0 -top-[15%] w-full h-[130%] object-cover" aria-hidden="true">
+  <div class="absolute inset-0 bg-linear-to-b from-navy-950/92 via-navy-900/85 to-navy-950/95" aria-hidden="true"></div>
+  <div class="absolute inset-0 dot-bg opacity-40" aria-hidden="true"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <app-section-header appScrollReveal="fade-up" [dark]="true" badge="DNS Africa en chiffres"
+      title="Une envergure qui se mesure" subtitle="Des projets de toute taille, pilotés avec le même niveau d'exigence, du Vieux Continent au Sahel." />
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       @for (s of stats; track s.label; let i = $index) {
-        <div appScrollReveal="zoom" [class]="'sr-delay-' + (i + 1)" class="group bg-white p-7 md:p-10 hover:bg-offwhite transition-colors duration-300">
-          <i [class]="'ti ' + s.icon + ' text-2xl text-orange mb-5 block group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 origin-left'"></i>
-          <div class="font-heading text-3xl md:text-4xl xl:text-5xl font-extrabold text-navy leading-none tracking-tight whitespace-nowrap">
-            <span [appCountUp]="s.value" [prefix]="s.prefix" [suffix]="s.suffix">{{ s.prefix }}{{ s.value }}{{ s.suffix }}</span>
+        <div appScrollReveal="zoom" [class]="'sr-delay-' + (i + 1)">
+          <div appTilt="7" class="glass group rounded-3xl p-6 md:p-8 h-full">
+            <i [class]="'ti ' + s.icon + ' text-3xl text-orange mb-5 block group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 origin-left'"></i>
+            <div class="font-heading text-3xl md:text-3xl xl:text-4xl font-extrabold text-white leading-none tracking-tight whitespace-nowrap">
+              <span [appCountUp]="s.value" [prefix]="s.prefix" [suffix]="s.suffix">{{ s.prefix }}{{ s.value }}{{ s.suffix }}</span>
+            </div>
+            <div class="h-0.5 w-10 bg-linear-to-r from-orange to-green my-4 group-hover:w-20 transition-all duration-500"></div>
+            <div class="text-[#B8C9E3] text-sm leading-snug">{{ s.label }}</div>
           </div>
-          <div class="h-0.5 w-10 bg-linear-to-r from-orange to-green my-4 group-hover:w-20 transition-all duration-500"></div>
-          <div class="text-muted text-sm leading-snug">{{ s.label }}</div>
         </div>
       }
     </div>
@@ -204,11 +197,59 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
+     SECTEURS — cartes photo
+═══════════════════════════════════════════════════════════════ -->
+<section class="bg-white py-16 md:py-24">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <app-section-header
+      appScrollReveal="fade-up"
+      badge="Marchés"
+      title="Secteurs & typologies de projets"
+      subtitle="Des toitures tertiaires aux centrales HTA avec stockage : toutes les échelles, un même niveau d'exigence."
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+      @for (s of secteursPhoto; track s.title; let i = $index) {
+        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i % 2 + 1)">
+          <article class="photo-card h-72 md:h-96 flex items-end p-7 md:p-9 text-white shadow-xl shadow-navy/10" appTilt="3">
+            <img [src]="s.img" [alt]="s.alt" width="1400" height="788" loading="lazy">
+            <div class="photo-body">
+              <div class="w-11 h-11 rounded-xl bg-orange/90 flex items-center justify-center mb-4 shadow-lg shadow-orange/40">
+                <i [class]="'ti ' + s.icon + ' text-xl text-white'"></i>
+              </div>
+              <div class="photo-line mb-3"></div>
+              <h3 class="font-heading font-extrabold text-2xl md:text-3xl text-white mb-1">{{ s.title }}</h3>
+              <p class="text-[#D5E0F2] text-sm md:text-base">{{ s.desc }}</p>
+            </div>
+          </article>
+        </div>
+      }
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 mt-5 md:mt-6">
+      @for (s of secteursIcon; track s.title; let i = $index) {
+        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i + 1)">
+          <div appSpotlight class="glow-card h-full flex items-center gap-5 border border-border rounded-2xl p-6 bg-offwhite">
+            <div class="w-14 h-14 rounded-2xl bg-navy flex items-center justify-center shrink-0">
+              <i [class]="'ti ' + s.icon + ' text-2xl text-orange'"></i>
+            </div>
+            <div>
+              <h3 class="font-heading font-bold text-navy text-lg mb-1">{{ s.title }}</h3>
+              <p class="text-muted text-sm">{{ s.desc }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
      PRÉSENCE — carte stylisée
 ═══════════════════════════════════════════════════════════════ -->
 <section class="relative bg-hero text-white py-16 md:py-24 overflow-hidden">
   <div class="absolute inset-0 dot-bg opacity-60" aria-hidden="true"></div>
-  <div class="orb orb-a w-[420px] h-[420px] bg-orange/15 top-0 left-1/3" aria-hidden="true"></div>
+  <div class="orb orb-a w-105 h-105 bg-orange/15 top-0 left-1/3" aria-hidden="true"></div>
 
   <div class="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
     <div appScrollReveal="fade-up">
@@ -236,7 +277,6 @@
           <path [attr.d]="c.path" stroke="#4AAD52" stroke-opacity=".25" stroke-width="1.5" fill="none"/>
           <path [attr.d]="c.path" stroke="#F7941D" stroke-width="2" fill="none" class="flow-path" [style.animation-delay]="c.delay"/>
         }
-        <!-- Hub France -->
         <circle [attr.cx]="hub.x" [attr.cy]="hub.y" r="7" fill="#F7941D"/>
         <circle [attr.cx]="hub.x" [attr.cy]="hub.y" r="7" fill="#F7941D" class="ping"/>
         <text [attr.x]="hub.x + 16" [attr.y]="hub.y + 5" fill="#fff" font-size="15" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">France</text>
@@ -251,58 +291,28 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     SECTEURS
+     MÉTHODE — timeline pilotée par le scroll
 ═══════════════════════════════════════════════════════════════ -->
-<section class="bg-white py-16 md:py-24">
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-    <app-section-header
-      appScrollReveal="fade-up"
-      badge="Marchés"
-      title="Secteurs & typologies de projets"
-      subtitle="Des toitures tertiaires aux centrales HTA avec stockage : toutes les échelles, un même niveau d'exigence."
-    />
+<section class="relative bg-navy-950 text-white py-16 md:py-28 overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-60" aria-hidden="true"></div>
+  <div class="relative max-w-4xl mx-auto px-6 sm:px-8">
+    <app-section-header appScrollReveal="fade-up" [dark]="true" [center]="true" badge="Notre méthode"
+      title="Cinq étapes, zéro surprise" subtitle="Un processus clair, des délais tenus et des livrables prêts pour l'exécution." />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      @for (s of secteurs; track s.title; let i = $index) {
-        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i % 3 + 1)">
-          <div appSpotlight class="glow-card h-full flex items-start gap-4 border border-border rounded-2xl p-5 bg-white">
-            <div [class]="'w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ' + s.bgClass">
-              <i [class]="'ti ' + s.icon + ' text-xl ' + s.iconClass"></i>
-            </div>
-            <div>
-              <h3 class="font-heading font-bold text-navy text-base mb-1">{{ s.title }}</h3>
-              <p class="text-muted text-sm">{{ s.desc }}</p>
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-  </div>
-</section>
+    <div appScrollProgress class="relative pl-16 md:pl-24">
+      <div class="absolute left-6 md:left-9 top-2 bottom-2 w-0.5 bg-white/10 rounded-full"></div>
+      <div class="tl-fill absolute left-6 md:left-9 top-2 bottom-2 w-0.5 rounded-full"></div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     MÉTHODE
-═══════════════════════════════════════════════════════════════ -->
-<section class="bg-offwhite py-16 md:py-24">
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-    <app-section-header
-      appScrollReveal="fade-up"
-      [center]="true"
-      badge="Notre méthode"
-      title="Cinq étapes, zéro surprise"
-      subtitle="Un processus clair, des délais tenus et des livrables prêts pour l'exécution."
-    />
-
-    <div class="relative grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
-      <div appScrollReveal="fade-in" class="line-grow hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-linear-to-r from-orange via-orange/60 to-green"></div>
       @for (st of steps; track st.title; let i = $index) {
-        <div appScrollReveal="fade-up" [class]="'sr-delay-' + (i + 1)" class="relative text-center">
-          <div class="relative z-10 w-16 h-16 mx-auto mb-4 rounded-full bg-white border-2 border-orange text-orange flex items-center justify-center shadow-lg shadow-orange/15 hover:bg-orange hover:text-white hover:scale-110 transition-all duration-300">
-            <i [class]="'ti ' + st.icon + ' text-2xl'"></i>
+        <div class="tl-step relative pb-12 last:pb-0" [style.--i]="i">
+          <div class="tl-node absolute -left-16 md:-left-24 top-0 w-12 h-12 md:w-[4.5rem] md:h-[4.5rem] ml-0 rounded-full border-2 flex items-center justify-center" style="translate: 0 -2px">
+            <i [class]="'ti ' + st.icon + ' text-xl md:text-3xl text-white'"></i>
           </div>
-          <div class="text-[11px] font-semibold tracking-widest text-orange mb-1">ÉTAPE {{ i + 1 }}</div>
-          <h3 class="font-heading font-bold text-navy text-base mb-1">{{ st.title }}</h3>
-          <p class="text-muted text-sm leading-snug px-2">{{ st.desc }}</p>
+          <div class="glass rounded-2xl p-5 md:p-7">
+            <div class="text-[11px] font-semibold tracking-widest text-orange mb-1">ÉTAPE {{ i + 1 }}</div>
+            <h3 class="font-heading font-bold text-white text-xl md:text-2xl mb-1">{{ st.title }}</h3>
+            <p class="text-[#B8C9E3] text-sm md:text-base leading-relaxed">{{ st.desc }}</p>
+          </div>
         </div>
       }
     </div>
@@ -310,20 +320,21 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CTA FINAL
+     CTA FINAL — photo plein cadre
 ═══════════════════════════════════════════════════════════════ -->
-<section class="relative bg-hero text-white py-20 md:py-28 overflow-hidden text-center">
-  <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
-  <div class="orb orb-a w-[500px] h-[500px] bg-orange/25 -top-60 left-1/2 -translate-x-1/2" aria-hidden="true"></div>
+<section class="relative overflow-hidden text-white text-center py-28 md:py-40">
+  <img appParallax="0.12" src="/images/centrale-solaire.jpg" alt="" width="1600" height="1066" loading="lazy"
+       class="animate-kenburns absolute inset-x-0 -top-[15%] w-full h-[130%] object-cover" aria-hidden="true">
+  <div class="absolute inset-0 bg-linear-to-b from-navy-950/85 via-navy-900/75 to-navy-950/95" aria-hidden="true"></div>
+  <app-energy-canvas [density]="0.6" />
   <div appScrollReveal="fade-up" class="relative max-w-3xl mx-auto px-6">
-    <h2 class="font-heading text-3xl md:text-5xl font-extrabold tracking-tight mb-5 leading-tight">
+    <h2 class="font-heading text-white text-3xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
       Votre prochain projet solaire <span class="text-gradient">commence ici</span>
     </h2>
-    <p class="text-[#B8C9E3] text-base md:text-lg mb-10">Devis gratuit sous 24 h · Étude de faisabilité offerte sur votre premier dossier</p>
-    <a routerLink="/contact"
-       class="btn-shine inline-flex items-center gap-2.5 bg-orange hover:bg-orange-600 text-white font-semibold px-9 py-4 rounded-full shadow-lg shadow-orange/30">
-      Demander un devis gratuit
-      <i class="ti ti-arrow-up-right"></i>
+    <p class="text-[#C4D3EA] text-base md:text-xl mb-10">Devis gratuit sous 24 h · Étude de faisabilité offerte sur votre premier dossier</p>
+    <a routerLink="/contact" appMagnetic
+       class="btn-shine inline-flex items-center gap-2.5 bg-orange hover:bg-orange-600 text-white font-semibold px-10 py-4 rounded-full shadow-lg shadow-orange/30">
+      Demander un devis gratuit <i class="ti ti-arrow-up-right"></i>
     </a>
   </div>
 </section>
