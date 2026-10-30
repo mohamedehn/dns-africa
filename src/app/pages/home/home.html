@@ -171,11 +171,11 @@
     <app-section-header
       appScrollReveal="fade-up"
       badge="Ce que nous faisons"
-      title="Trois missions, un interlocuteur"
-      subtitle="De l'avant-projet à la réception, DNS Africa intervient à chaque phase de votre projet photovoltaïque."
+      title="Du solaire au digital, un interlocuteur"
+      subtitle="De l'avant-projet à la réception, DNS Africa intervient à chaque phase de votre projet photovoltaïque, et prolonge son ingénierie par des outils numériques pour l'industrie."
     />
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
       @for (m of missions; track m.title; let i = $index) {
         <article appScrollReveal="fade-up" [class]="'sr-delay-' + (i + 1)">
           <div appSpotlight class="glow-card h-full bg-white border border-border rounded-2xl overflow-hidden">

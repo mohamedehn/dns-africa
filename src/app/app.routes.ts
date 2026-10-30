@@ -17,7 +17,7 @@ export const routes: Routes = [
   {
     path: 'savoir-faire', component: SavoirFaireComponent,
     title: 'Savoir-faire — Ingénierie photovoltaïque, HTA, BESS et CVC | DNS Africa',
-    data: { description: 'Simulation PVsyst/PVGIS, dimensionnement, schémas unifilaires BT/HTA, CCTP, BESS, CVC et fluides. Livrables normés NF C 15-100, guides UTE, référentiels STEG, SOMELEC et SONELEC.' }
+    data: { description: 'Simulation PVsyst/PVGIS, dimensionnement, schémas unifilaires BT/HTA, CCTP, BESS, CVC et fluides. Livrables normés NF C 15-100, guides UTE, référentiels STEG, SOMELEC et SONELEC. Pôle digital : jumeaux numériques et gestion de stock.' }
   },
   {
     path: 'offre', component: OffreComponent,

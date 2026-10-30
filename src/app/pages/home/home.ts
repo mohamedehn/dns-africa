@@ -51,6 +51,12 @@ export class HomeComponent {
       title: 'AMO & Supervision',
       desc: 'Assistance MOA, consultation installateurs, suivi de chantier hebdomadaire, contrôle qualité, réception technique.',
       tag: 'AMO / OPC', tagClass: 'bg-green-100 text-green'
+    },
+    {
+      n: '04', accentClass: 'bg-linear-to-r from-orange to-green', iconBg: 'bg-blue-100', iconColor: 'text-navy', icon: 'ti-3d-cube-sphere',
+      title: 'Jumeaux numériques',
+      desc: "Réplique virtuelle de vos magasins, connectée à l'ERP, RFID et capteurs : gestion de stock intelligente pour l'industrie.",
+      tag: 'Pôle Digital', tagClass: 'bg-blue-100 text-navy'
     }
   ];
 

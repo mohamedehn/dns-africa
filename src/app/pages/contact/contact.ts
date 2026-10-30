@@ -35,6 +35,7 @@ export class ContactComponent {
     'Ingénierie CVC / Fluides',
     'BESS / Stockage',
     "Owner's Engineer (grand projet)",
+    'Jumeau numérique / Gestion de stock',
     'Autre / À définir'
   ];
 

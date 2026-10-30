@@ -14,7 +14,8 @@ export class FooterComponent {
     { label: 'Électricité BT & HTA',      path: '/savoir-faire' },
     { label: 'CVC & Fluides',             path: '/savoir-faire' },
     { label: 'BESS & Stockage',           path: '/savoir-faire' },
-    { label: 'AMO / Supervision',         path: '/savoir-faire' }
+    { label: 'AMO / Supervision',         path: '/savoir-faire' },
+    { label: 'Jumeaux numériques & stock', path: '/savoir-faire' }
   ];
 
   readonly year = new Date().getFullYear();

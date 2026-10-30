@@ -72,6 +72,17 @@ export class SavoirFaireComponent {
         { icon: 'ti-coin',             title: 'Optimisation économique', desc: 'Arbitrage tarifaire, peak shaving, valorisation en services réseau' },
         { icon: 'ti-file-analytics',   title: "Études de cas d'usage",   desc: 'Autoconsommation maximisée, effacement, résilience réseau, hybridation diesel' }
       ]
+    },
+    {
+      id: 'digital', label: 'Jumeaux numériques', heading: 'Jumeaux numériques & gestion de stock',
+      items: [
+        { icon: 'ti-3d-cube-sphere',   title: 'Modéliser',               desc: 'Réplique virtuelle des magasins, emplacements, articles et équipements' },
+        { icon: 'ti-plug-connected',   title: 'Connecter',               desc: "Synchronisation avec l'ERP, les lecteurs RFID et codes-barres, les capteurs IoT" },
+        { icon: 'ti-chart-dots',       title: 'Analyser',                desc: 'Consommations, prévisions de besoins, alertes de rupture et de péremption' },
+        { icon: 'ti-arrows-split',     title: 'Décider',                 desc: 'Simulation de scénarios, réapprovisionnement optimisé, arbitrages multi-sites' },
+        { icon: 'ti-dashboard',        title: 'Pilotage',                desc: 'Tableaux de bord, alertes, vue 3D ou plan des magasins, état du stock en temps réel' },
+        { icon: 'ti-server-2',         title: 'Souveraineté des données', desc: 'Déploiement en ligne ou sur les serveurs du client, selon ses exigences de sécurité' }
+      ]
     }
   ];
 
